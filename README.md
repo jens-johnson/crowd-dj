@@ -1,5 +1,8 @@
-** Crowd DJ
+# Crowd DJ
 
+## Created by: Josh Tanke and Christopher Jens Johnson
 
-** Created by: Josh Tanke and Christopher Johnson
+*An exploration of C/C++ server-client interactions using the Spotify API*
+---
 
+Have you ever been in a restaurant, bar, or party where the music just plain and simple sucks? Do you wish there was a way to 
