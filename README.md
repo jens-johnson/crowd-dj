@@ -6,7 +6,7 @@
 
 ___
 
-Have you ever been in a restaurant, bar, or party where the music just plain and simple sucks? Do you wish there was a way to put the music in the hands of the crowd? Crowd DJ is our exploration of how we can leverage one of the world's largest music libraries, Spotify, to replace the sentimental yet archaic jukebox. Crowd DJ allows users to create, manage, and vote on music that goes into a dynamic playlist, allowing the highest-priority music to be played next.
+Have you ever been in a restaurant, bar, or party where the music just plain and simple sucked? Do you wish there was a way to put the music in the hands of the crowd? Crowd DJ is our exploration of how we can leverage one of the world's largest music libraries, Spotify, to replace the sentimental yet archaic jukebox. Crowd DJ allows users to create, manage, and vote on music that goes into a dynamic playlist, allowing the highest-priority music to be played next.
 
 
 *How does it work?*
