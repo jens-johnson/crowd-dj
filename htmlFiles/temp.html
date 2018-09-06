@@ -1,0 +1,107 @@
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Crowd Dj</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    ol {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+ 
+    li {
+      font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    div {
+      text-align: center;
+    }
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+        /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+</head>
+<body>
+  <body>
+    <div style="text-align: right">
+      <button id="home_redirect" style="background-color: #1db954;">Return to Home Page</button>
+    </div>
+    <div style="text-align: center">
+        <h1>Search for a song</h1>
+        <input type="input" placeholder="Enter a song name" id="song_name">
+        <button id="search_songs">search</button>
+    </div>
+    <script type="text/javascript">
+      document.getElementById("search_songs").onclick = searchSongs;
+      document.getElementById("home_redirect").onclick = home_redirect;
+
+      function home_redirect(){
+        var send_home = new XMLHttpRequest();
+        send_home.open("GET", "/send_home", false);
+        send_home.send();
+        window.location.reload();
+        window.location.replace("http://localhost:8888");
+      }
+
+      function searchSongs(){
+        var song_search = new XMLHttpRequest();
+        var songName = document.getElementById("song_name").value;
+        songName = JSON.stringify(songName)
+        songName += "/";
+        song_search.open("POST", "/search_song", false);
+        song_search.send(songName);
+        window.location.reload();
+      }
+    </script><br>
+<div>
+<ol><li>Song: Hello &nbsp Artist(s): Adele</li><button name="button0" id="0ENSn4fwAbCGeFGVUbXEU3" onClick="send_song(this.id)">Add Song</button><br><br>
+<li>Song: Hello &nbsp Artist(s): Adele</li><button name="button1" id="4sPmO7WMQUAf45kwMOtONw" onClick="send_song(this.id)">Add Song</button><br><br>
+<li>Song: Hello There &nbsp Artist(s): Dillon Francis,Yung Pinch</li><button name="button2" id="7fyx7nBQTEtYrfXc0UgUYs" onClick="send_song(this.id)">Add Song</button><br><br>
+<li>Song: Hello Ego &nbsp Artist(s): Jhene Aiko,Chris Brown</li><button name="button3" id="2kt06ZsD735FYBZO8yAAQs" onClick="send_song(this.id)">Add Song</button><br><br>
+<li>Song: Hello Beautiful &nbsp Artist(s): Noah Schnacky</li><button name="button4" id="4pYd8dIohiqc3KsxSRqf0w" onClick="send_song(this.id)">Add Song</button><br><br>
+</ol>
+</div>
+<script type="text/javascript">
+	function send_song(button_id){
+	var songnumber = JSON.stringify(button_id);
+	songnumber += "/";
+	var song_request = new XMLHttpRequest();
+	song_request.open("POST", "/send_song", false);
+	song_request.send(songnumber)};
+</script>
+</body>
+</html>

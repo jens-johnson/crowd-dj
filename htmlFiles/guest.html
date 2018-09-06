@@ -1,0 +1,84 @@
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Crowd Dj</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+
+    div {
+      text-align: center;
+    }
+    
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+        /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+  </style>
+</head>
+<body>
+    <div style="text-align: right">
+      <button id="home_redirect" style="background-color: #1db954;">Return to Home Page</button>
+    </div>
+    <div style="text-align: center">
+        <h1>Search for a Playlist</h1>
+        <input type="input" placeholder="playlist name" id="playlist_name">
+        <button id="search_playlist">add songs</button>
+    </div>
+    
+   
+    <script type="text/javascript">
+      document.getElementById("search_playlist").onclick = playlist_redirect;
+      document.getElementById("home_redirect").onclick = home_redirect;
+
+      function home_redirect(){
+        var send_home = new XMLHttpRequest();
+        send_home.open("GET", "/send_home", false);
+        send_home.send();
+        window.location.reload();
+        window.location.replace("http://localhost:8888");
+      }
+
+      function playlist_redirect(){
+        var playlist_search = new XMLHttpRequest();
+        var playlistName = document.getElementById("playlist_name").value;
+        playlistName = JSON.stringify(playlistName)
+        playlistName += "/";
+        playlist_search.open("POST", "/playlist_search", false);
+        playlist_search.send(playlistName);
+        window.location.reload();
+      }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Crowd Dj</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <style>
+    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    .navbar {
+      margin-bottom: 0;
+      border-radius: 0;
+    }
+    
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 450px}
+    
+    div {
+      text-align: center;
+    }
+    /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+    }
+        /* Set black background color, white text and some padding */
+    footer {
+      background-color: #555;
+      color: white;
+      padding: 15px;
+    }
+    
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+      }
+      .row.content {height:auto;} 
+    }
+
+    .divider{
+        width:20px;
+        height:auto;
+      display:inline-block;
+      }
+      
+  </style>
+</head>
+<body>
+    <div style="text-align: center">
+        <h1>Welcome to Crowd DJ!</h1>
+        <p>Are you a Guest or a Host?</p>
+        <button id="guest_button">Guest</button>
+        <div class="divider"/></div>
+        <button id="auth_request_button">Host</button>
+        <script>
+          document.getElementById("auth_request_button").onclick = host_login;
+          document.getElementById("guest_button").onclick = playlist_redirect;
+          
+          function host_login(){
+            window.location.replace("https://accounts.spotify.com/authorize?client_id=dd944cd436a546268500ecee837bad81&redirect_uri=http://localhost:8888&scope=user-read-private%20user-read-email%20playlist-read-private%20playlist-read-collaborative%20playlist-modify-public%20playlist-modify-private%20user-follow-modify%20user-follow-read%20user-library-read%20user-library-modify%20user-read-private%20user-read-birthdate%20user-read-email%20user-top-read%20ugc-image-upload%20user-read-playback-state%20user-modify-playback-state%20user-read-currently-playing%20user-read-recently-played&response_type=token&state=123");
+            
+          }
+          
+
+          function locationHashChanged() {
+            
+            var auth_token = window.location.href;
+            var request = new XMLHttpRequest();
+            request.open("POST", "/auth_token", false);
+            request.send(JSON.stringify(auth_token));
+            window.location.reload();
+            
+          }
+
+          function playlist_redirect(){
+            var playlist_request = new XMLHttpRequest();
+            playlist_request.open("GET", "/playlist_redirect", false);
+            playlist_request.send();
+            window.location.reload();
+          }
+
+          if (window.location.href != "http://localhost:8888/") {
+            locationHashChanged();
+          }
+
+
+
+        </script>
+    </div>
+</body>
+</html>
